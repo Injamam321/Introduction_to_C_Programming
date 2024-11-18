@@ -1,38 +1,30 @@
 #include <stdio.h>
 
+int check_expression(int a, int b, int c, int d) {
+    // Check all combinations of operators (+, -, *)
+    if (a + b + c == d) return 1;  // a + b + c
+    if (a + b - c == d) return 1;  // a + b - c
+    if (a + b * c == d) return 1;  // a + b * c
+    if (a - b + c == d) return 1;  // a - b + c
+    if (a - b - c == d) return 1;  // a - b - c
+    if (a - b * c == d) return 1;  // a - b * c
+    if (a * b + c == d) return 1;  // a * b + c
+    if (a * b - c == d) return 1;  // a * b - c
+    if (a * b * c == d) return 1;  // a * b * c
+    return 0;  // If no valid operation gives d
+}
+
 int main() {
-    long long a, b, c, d;
-    scanf("%lld %lld %lld %lld", &a, &b, &c, &d);
-
-    // Check all combinations of operations
-    // a, b, c can be used with +, -, * in all positions
-
-    // Additions and Subtractions
-    if (a + b + c == d ||
-        a + b - c == d ||
-        a - b + c == d ||
-        b + c - a == d ||
-        b + a - c == d ||
-        c + a - b == d ||
-        c + b - a == d) 
-        {
+    int a, b, c, d;
+    // Read the input values
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+    
+    // Check if we can form d with a, b, c using the allowed operations
+    if (check_expression(a, b, c, d)) {
         printf("YES\n");
-        return 0;
+    } else {
+        printf("NO\n");
     }
-
-    // Multiplications and other combinations
-    if (a * b + c == d ||
-        a + b * c == d ||
-        a * b - c == d ||
-        a - b * c == d ||
-        b * c + a == d ||
-        b + c * a == d ||
-        c * a + b == d ||
-        c + a * b == d) {
-        printf("YES\n");
-        return 0;
-    }
-
-    printf("NO\n");
+    
     return 0;
 }
